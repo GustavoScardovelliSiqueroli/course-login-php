@@ -85,3 +85,30 @@ body {
     cursor: pointer;
     background-color: rgba(0, 0, 255, 0.539);
 }
+
+.form-register {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 350px;
+    background-color: rgb(214, 214, 214);
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.form-register input[type="email"] {
+    height: 50px;
+    padding-left: 10px;
+    width: 350px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.form-register input[type="email"]:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}

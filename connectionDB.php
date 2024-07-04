@@ -1,16 +1,27 @@
 <?php
 
-$host = "localhost";
-$dbName = "gsss_db";
-$dbUser = "root";
-$dbPassword = "";
+class ConnectionDB
+{
 
-$dsn = "mysql:host={$host};port=3306;dbname={$dbName}";
+    private string $host = "localhost";
+    private string $dbName = "gsss_db";
+    private string $dbUser = "root";
+    private string $dbPassword = "";
+    private string $dsn;
 
-try {
-    $pdo = new PDO($dsn, $dbUser, $dbPassword);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conneciton with success";
-} catch (PDOException $e) {
-    echo "Erron in connection {$e->getMessage()}";
+    public function __construct()
+    {
+        $this->dsn = "mysql:host={$this->host};port=3306;dbname={$this->dbName}";
+    }
+
+    public function connect()
+    {
+        try {
+            $pdo = new PDO($this->dsn, $this->dbUser, $this->dbPassword);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
 }
