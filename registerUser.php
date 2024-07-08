@@ -39,10 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] = "POST") {
         $validate = new GsssValidate($_POST["login"], $_POST["password"]);
         $validateRerturn = $validate->validate();
         if (empty($validateRerturn)) {
-
             $newUser = new UserModel(null, $_POST["login"], $_POST["password"], $_POST["email"]);
             $userService = new UserService();
-            $userService->save($newUser);
+            $userService->regiser($newUser);
         }
         foreach ($validateRerturn as $value) {
             if ($value == 1) {

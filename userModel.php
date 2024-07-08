@@ -4,7 +4,7 @@ class UserModel
     public string|null $id;
     public string $name;
     public string $password;
-    public string $email;
+    public string|null $email;
 
     public function __construct(
         string $id = null,

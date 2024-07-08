@@ -39,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] = "POST") {
             include "./userModel.php";
 
             $userService = new UserService();
+            $user = new UserModel(name: $_POST["login"], password:$_POST["password"]);
+            $userService->login($user);
         }
 
         foreach ($validateRerturn as $value) {
