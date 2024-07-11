@@ -1,3 +1,10 @@
+<?php
+spl_autoload_register(function ($class) {
+    include 'classes/' . $class . '.php';
+});
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,6 +16,9 @@
 </head>
 
 <body>
+    <?php
+    include "navBar.html"
+    ?>
     <div style="width: 100%; height:100%; display:flex; align-items:center; justify-content:center;">
 
         <div class="form-login">
@@ -28,18 +38,15 @@
 </html>
 <?php
 if ($_SERVER["REQUEST_METHOD"] = "POST") {
-    include "validate.php";
     if (isset($_POST["submit"])) {
 
-        $validate = new GsssValidate($_POST["login"], $_POST["password"]);
-        $validateRerturn = $validate->validate();
+        $validate = new UtilsGS();
+        $validateRerturn = $validate->validateFourChars([$_POST["login"], $_POST["password"]]);
 
         if (empty($validateRerturn)) {
-            include "./userService.php";
-            include "./userModel.php";
 
             $userService = new UserService();
-            $user = new UserModel(name: $_POST["login"], password:$_POST["password"]);
+            $user = new UserModel(name: $_POST["login"], password: $_POST["password"]);
             $userService->login($user);
         }
 

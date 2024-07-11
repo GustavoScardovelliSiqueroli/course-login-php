@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <?php 
+    include 'navBar.html';
+    ?>
     <div style="width: 100%; height:100%; display:flex; align-items:center; justify-content:center;">
 
         <div class="form-register">
@@ -30,14 +33,15 @@
 </html>
 
 <?php
-    include './validate.php';
-    include './userModel.php';
-    include './userService.php';
 
 if ($_SERVER["REQUEST_METHOD"] = "POST") {
     if (isset($_POST["submit"])) {
-        $validate = new GsssValidate($_POST["login"], $_POST["password"]);
-        $validateRerturn = $validate->validate();
+        // include "classes/utilsGS.php";
+        // include "classes/connectionDB.php";
+        // include "classes/userModel.php";
+        // include "classes/userService.php";
+        $validate = new UtilsGS();
+        $validateRerturn = $validate->validateFourChars([$_POST["login"], $_POST["password"]]);
         if (empty($validateRerturn)) {
             $newUser = new UserModel(null, $_POST["login"], $_POST["password"], $_POST["email"]);
             $userService = new UserService();

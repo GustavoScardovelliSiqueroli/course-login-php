@@ -1,6 +1,4 @@
 <?php
-include './connectionDB.php';
-include './utilsGS.php';
 
 class UserService
 {
@@ -65,6 +63,8 @@ class UserService
         if (!password_verify($this->userModel->password, $userInDB["password"])){
             throw new Exception("login failed");
         }
-        echo "LOGGIN!";
+        session_start();
+        $_SESSION["user"] = $userInDB["id"];
+        header("Location: taskslist.php");
     }
 }

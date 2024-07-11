@@ -10,4 +10,17 @@ final class UtilsGS
 
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+
+    public function validateFourChars(array $vars)
+    {
+        $response = [];
+        foreach ($vars as $key => $value) {
+            if (strlen($value) < 4){
+                $response[$key] = $value;
+            }
+        }
+
+        return $response;
+    }
+
 }
