@@ -16,7 +16,7 @@ class UserService
         }
     }
 
-    public function regiser(UserModel $userModel = null)
+    public function register(UserModel $userModel = null)
     {
         $this->userModel = $userModel;
         $utils = new UtilsGS();
@@ -34,15 +34,8 @@ class UserService
         $stmt->bindParam(':email', $this->userModel->email);
 
         $stmt->execute();
-    }
 
-    public function getAll()
-    {
-        $pdoConnected = $this->connectionDB->connect();
-
-        $query = 'SELECT * FROM users_gs';
-        $stmt = $pdoConnected->query($query);
-        return $stmt;
+        header("Location: index.php");
     }
 
     public function login($userModel)

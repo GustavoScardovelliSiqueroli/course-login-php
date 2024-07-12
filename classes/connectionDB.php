@@ -6,7 +6,7 @@ class ConnectionDB
     private string $host = "localhost";
     private string $dbName = "gsss";
     private string $dbUser = "root";
-    private string $dbPassword = "";
+    private string $dbPassword = "1234";
     private string $dsn;
 
     public function __construct()

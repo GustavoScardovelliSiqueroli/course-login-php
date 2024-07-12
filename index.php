@@ -12,12 +12,13 @@ spl_autoload_register(function ($class) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
 </head>
 
 <body>
     <?php
-    include "navBar.html"
+    include __DIR__ . "/static/templates/navBar.html"
     ?>
     <div style="width: 100%; height:100%; display:flex; align-items:center; justify-content:center;">
 
@@ -44,18 +45,21 @@ if ($_SERVER["REQUEST_METHOD"] = "POST") {
         $validateRerturn = $validate->validateFourChars([$_POST["login"], $_POST["password"]]);
 
         if (empty($validateRerturn)) {
-
             $userService = new UserService();
             $user = new UserModel(name: $_POST["login"], password: $_POST["password"]);
-            $userService->login($user);
+            try {
+                $userService->login($user);
+            } catch (Exception $e) {
+                echo '<script src="./static/js/loginFailed.js"></script>';
+            }
         }
 
-        foreach ($validateRerturn as $value) {
-            if ($value == 1) {
-                echo '<script src="./setBgLogin.js"></script>';
+        foreach ($validateRerturn as $key => $value) {
+            if ($value == $_POST["login"]) {
+                echo '<script src="./static/js/setBgLogin.js"></script>';
             }
-            if ($value == 2) {
-                echo '<script src="./setBgPassword.js"></script>';
+            if ($value == $_POST["password"]) {
+                echo '<script src="./static/js/setBgPassword.js"></script>';
             }
         }
     }
