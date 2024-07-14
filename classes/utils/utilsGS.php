@@ -1,4 +1,6 @@
 <?php
+
+namespace utils;
 final class UtilsGS
 {
     public function uuidv4()
