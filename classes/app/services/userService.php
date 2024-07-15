@@ -43,7 +43,7 @@ class UserService
 
         $stmt->execute();
 
-        header("Location: index.php");
+        header("Location: ./tasks");
     }
 
     public function login($userModel)
@@ -64,6 +64,7 @@ class UserService
         if (!password_verify($this->userModel->password, $userInDB["password"])) {
             throw new Exception("login failed");
         }
+
         return $userInDB["id_user"];
     }
 }

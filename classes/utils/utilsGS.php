@@ -2,9 +2,11 @@
 
 namespace utils;
 
+use Exception;
+
 final class UtilsGS
 {
-    public function uuidv4()
+    public static function uuidv4()
     {
         $data = random_bytes(16);
 
@@ -14,7 +16,7 @@ final class UtilsGS
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    public function validateFourChars(array $vars)
+    public static function validateFourChars(array $vars)
     {
         $response = [];
         foreach ($vars as $key => $value) {
@@ -25,4 +27,19 @@ final class UtilsGS
 
         return $response;
     }
+
+    public static function isLoggedIn(){
+        try{
+            session_start();
+            $userId = $_SESSION["user"]; 
+            if(empty($userId)){
+                return false;
+            }
+            return $userId;
+        }
+        catch(Exception $e){
+            return false;
+        }
+    }
+
 }

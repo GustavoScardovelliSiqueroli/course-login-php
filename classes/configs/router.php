@@ -9,7 +9,6 @@ class Router
 {
     public static function mainRouter(): void
     {
-        // Obtém o caminho da URL
         $request = $_GET['path'] ?? '';
 
         switch ($request) {
@@ -20,7 +19,7 @@ class Router
 
             case 'register':
             case 'register/':
-                echo UserController::register();
+                echo UserController::register(self::getMethod());
                 break;
 
             case 'tasks':

@@ -12,7 +12,7 @@ final class TaskService
         $returnTasksRender = [];
         foreach ($arrayTaks as $key => $value) {
             $returnTasksRender[] = ViewUtils::render(
-                'task-item',
+                'items/task-item',
                 ["taskTitle" => $value["title"]]
             );
         }
