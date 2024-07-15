@@ -3,6 +3,7 @@
 namespace configs;
 
 use app\controllers\UserController;
+use app\controllers\TaskController;
 
 class Router
 {
@@ -12,8 +13,8 @@ class Router
         $request = $_GET['path'] ?? '';
 
         switch ($request) {
-            case '':
-            case '/':
+            case 'login':
+            case 'login/':
                 echo UserController::login(self::getMethod());
                 break;
 
@@ -22,6 +23,10 @@ class Router
                 echo UserController::register();
                 break;
 
+            case 'tasks':
+            case 'tasks/':
+                echo TaskController::homeTaks();
+                break;
             default:
                 // Exibir página de erro 404
                 http_response_code(404);
