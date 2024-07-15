@@ -1,6 +1,7 @@
 <?php
 
 namespace utils;
+
 final class UtilsGS
 {
     public function uuidv4()
@@ -17,12 +18,11 @@ final class UtilsGS
     {
         $response = [];
         foreach ($vars as $key => $value) {
-            if (strlen($value) < 4){
+            if (strlen($value) < 4) {
                 $response[$key] = $value;
             }
         }
 
         return $response;
     }
-
 }

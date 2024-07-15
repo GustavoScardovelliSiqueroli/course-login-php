@@ -1,7 +1,8 @@
 <?php
 
-namespace services;
-use \models\UserModel;
+namespace app\services;
+
+use \app\models\UserModel;
 use \configs\ConnectionDB;
 use Exception;
 use PDO;
@@ -17,7 +18,7 @@ class UserService
     public function __construct(UserModel $userModel = null, string|null  $dbUserTable = null)
     {
         $this->userModel = $userModel;
-    $this->connectionDB = new ConnectionDB();
+        $this->connectionDB = new ConnectionDB();
         if (!$dbUserTable == null) {
             $this->dbUserTable = $dbUserTable;
         }
@@ -29,13 +30,13 @@ class UserService
         $utils = new UtilsGS();
         $pdoConnected = $this->connectionDB->connect();
 
-        $query = "INSERT INTO {$this->dbUserTable} (id_user, name, password, email) VALUES (:id, :name, :password, :email)";
+        $query = "INSERT INTO {$this->dbUserTable} (id_user, name, password, email) VALUES (:id_user, :name, :password, :email)";
         $stmt = $pdoConnected->prepare($query);
 
         $newUUID = $utils->uuidv4();
         $hashedPassword = password_hash($this->userModel->password, PASSWORD_DEFAULT);
 
-        $stmt->bindParam(':id', $newUUID);
+        $stmt->bindParam(':id_user', $newUUID);
         $stmt->bindParam(':name', $this->userModel->name);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':email', $this->userModel->email);
@@ -64,7 +65,7 @@ class UserService
             throw new Exception("login failed");
         }
         session_start();
-        $_SESSION["user"] = $userInDB["id"];
+        $_SESSION["user"] = $userInDB["id_user"];
         header("Location: taskslist.php");
     }
 }

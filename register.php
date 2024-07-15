@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "\classes\\" . $class . '.php';
+    include "classes\\" . $class . '.php';
 });
 ?>
 
@@ -15,30 +15,17 @@ spl_autoload_register(function ($class) {
 </head>
 
 <body>
-    <?php
-    include __DIR__ . '/static/templates/navBar.html';
-    ?>
-    <div style="width: 100%; height:100%; display:flex; align-items:center; justify-content:center;">
 
-        <div class="form-register">
-            <h1>Register to my website</h1>
-            <br>
-            <div class="form-content">
-
-                <form action="" method="post">
-                    <input type="text" name="login" id="login" placeholder="Login">
-                    <input type="password" name="password" id="password" placeholder="Password">
-                    <input type="email" name="email" id="email" placeholder="Email">
-                    <input type="submit" value="Register" name="submit" id="submit">
-                </form>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
 
 <?php
+
+use \utils\UtilsGS;
+use \utils\ViewUtils;
+use \app\models\UserModel;
+use \app\services\UserService;
 
 if ($_SERVER["REQUEST_METHOD"] = "POST") {
     if (isset($_POST["submit"])) {
@@ -49,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] = "POST") {
             $newUser = new UserModel(null, $_POST["login"], $_POST["password"], $_POST["email"]);
             $userService = new UserService();
             $userService->register($newUser);
-
         }
         foreach ($validateRerturn as $key => $value) {
             if ($value == $_POST["login"]) {

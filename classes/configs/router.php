@@ -2,32 +2,36 @@
 
 namespace configs;
 
-use views\UserView;
+use app\controllers\UserController;
+
 class Router
 {
-    private static function after($string, $inthat)
-    {
-        if (!is_bool(strpos($inthat, $string)))
-            return substr($inthat, strpos($inthat, $string) + strlen($string));
-    }
-
     public static function mainRouter(): void
     {
-
-        $request = $_SERVER['REQUEST_URI'];
-        $resourceDir = '/../src/resources/templates/';
-        $request = Router::after('/', (Router::after('/', $request)));
+        // Obtém o caminho da URL
+        $request = $_GET['path'] ?? '';
 
         switch ($request) {
             case '':
             case '/':
-                echo UserView::login();
+                echo UserController::login(self::getMethod());
+                break;
+
+            case 'register':
+            case 'register/':
+                echo UserController::register();
                 break;
 
             default:
+                // Exibir página de erro 404
                 http_response_code(404);
-                // require dirname(__FILE__) . '/templates-errors/error-404.html';
                 echo "<h1>Page not found!</h1>";
+                break;
         }
+    }
+
+    private static function getMethod()
+    {
+        return $_SERVER["REQUEST_METHOD"];
     }
 }

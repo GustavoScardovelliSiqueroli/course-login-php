@@ -1,6 +1,7 @@
 <?php
 
-namespace models;
+namespace app\models;
+
 class UserModel
 {
     public string|null $id;

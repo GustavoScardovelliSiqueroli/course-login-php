@@ -1,9 +1,9 @@
 <?php
 
 
-namespace configs;
+namespace utils;
 
-class ViewConfigs
+class ViewUtils
 {
     public static function render(string $htmlName, array $vars = [], string $templatePath = '\static\templates\\')
     {

@@ -1,26 +1,26 @@
 <?php
 
-namespace views;
+namespace app\controllers;
 
-use \configs\ViewConfigs;
+use \utils\ViewUtils;
 
-final class mainPage
+final class MainPageController
 {
     public static function renderMainPage(string $htmlName, array $vars = [])
     {
-        $navBar = ViewConfigs::render(
+        $navBar = ViewUtils::render(
             'nav-bar',
         );
 
-        $footer = ViewConfigs::render(
+        $footer = ViewUtils::render(
             'footer',
         );
 
-        $content = ViewConfigs::render(
+        $content = ViewUtils::render(
             $htmlName,
             $vars
         );
-        return ViewConfigs::render(
+        return ViewUtils::render(
             'page',
             ['content' => $content, 'navbar' => $navBar, 'footer' => $footer]
         );

@@ -5,5 +5,6 @@ spl_autoload_register(function ($class) {
 ?>
 
 <?php
+
 use \configs\Router;
 Router::mainRouter();

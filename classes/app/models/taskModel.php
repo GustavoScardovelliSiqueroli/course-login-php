@@ -1,5 +1,8 @@
 <?php
-class UserModel
+
+namespace app\models;
+
+class TaskModel
 {
     public string|null $id;
     public string $title;
