@@ -14,7 +14,7 @@ final class MainPageController
 
         $footer = ViewUtils::render(
             'footer',
-        );
+        );  
 
         $content = ViewUtils::render(
             $htmlName,

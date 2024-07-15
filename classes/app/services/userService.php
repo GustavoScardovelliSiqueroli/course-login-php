@@ -64,8 +64,6 @@ class UserService
         if (!password_verify($this->userModel->password, $userInDB["password"])) {
             throw new Exception("login failed");
         }
-        session_start();
-        $_SESSION["user"] = $userInDB["id_user"];
-        header("Location: taskslist.php");
+        return $userInDB["id_user"];
     }
 }
