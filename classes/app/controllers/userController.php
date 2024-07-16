@@ -10,7 +10,7 @@ final class UserController
 {
     public static function login($requestMethod)
     {   
-        if (self::isGET($requestMethod)) {
+        if (MainPageController::isGET($requestMethod)) {
             return MainPageController::renderMainPage('login',);
         }
 
@@ -27,7 +27,7 @@ final class UserController
 
     public static function register($requestMethod)
     {
-        if (self::isGET($requestMethod)) {
+        if (MainPageController::isGET($requestMethod)) {
         return MainPageController::renderMainPage('register-user');
         }
 
@@ -36,11 +36,4 @@ final class UserController
         $userService->register($user);
     }
 
-    public static function isGET($requestMethod)
-    {
-        if ($requestMethod == "GET") {
-            return true;
-        }
-        return false;
-    }
 }

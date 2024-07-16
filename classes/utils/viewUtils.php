@@ -1,6 +1,5 @@
 <?php
 
-
 namespace utils;
 
 class ViewUtils

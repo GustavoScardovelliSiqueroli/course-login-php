@@ -24,7 +24,7 @@ class Router
 
             case 'tasks':
             case 'tasks/':
-                echo TaskController::homeTaks();
+                echo TaskController::homeTaks(self::getMethod());
                 break;
             default:
                 // Exibir página de erro 404
