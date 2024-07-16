@@ -1,6 +1,4 @@
 <?php
+session_start();
 session_destroy();
-unset($_SESSION['user']);
-$_SESSION['user'] = null;
-session_commit();
 header("Location: ../../login");
