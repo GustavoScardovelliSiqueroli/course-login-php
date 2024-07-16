@@ -11,26 +11,29 @@ final class TaskController
 
     public static function homeTaks($requestMethod)
     {
+        $taskService = new TaskService();
 
-        $task1 = new TaskModel("adsasda", "teste");
-        $task2 = new TaskModel("adsasda", "teste");
-        $task3 = new TaskModel("adsasda", "teste");
-        $task4 = new TaskModel("adsasda", "teste");
-        $task5 = new TaskModel("adsasda", "teste");
-        $taskasArrayMoc = [$task1->getArray(), $task2->getArray(), $task3->getArray(), $task4->getArray(), $task5->getArray()];
+        
+        session_start();
+        $resultQuery = $taskService->getAll($_SESSION["user"]);
+        foreach ($resultQuery as $value) {
+            foreach (($value->getArray()) as $key => $value) {
+                echo "{$key} = {$value} <br>";
+            };
+            echo "<br>";
+        }
+
+        exit;
 
         if (MainPageController::isGET($requestMethod)) {
             return MainPageController::renderMainPage(
                 'tasks',
-                ["tasks" => TaskService::renderTaksUnit($taskasArrayMoc)]
+                // ["tasks" => TaskService::renderTaksUnit($tasksInDB)]
             );
         }
 
-        $taskService = new TaskService();
         print_r($_POST["task"]);
         $newTask = new TaskModel(title: $_POST["task"]);
-        var_dump($newTask);
-        exit;
         $taskService->save($newTask);
 
     }
