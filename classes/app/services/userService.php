@@ -42,8 +42,6 @@ class UserService
         $stmt->bindParam(':email', $this->userModel->email);
 
         $stmt->execute();
-
-        header("Location: ./tasks");
     }
 
     public function login($userModel)

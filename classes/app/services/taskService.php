@@ -52,11 +52,11 @@ final class TaskService
         $pdoConnected = $this->connectionDB->connect();
         $stmt = $pdoConnected->prepare("SELECT * FROM tasks WHERE id_user = :id_user");
         $stmt->execute(["id_user" => $user]);
-        
+
         $returnList = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $task = new TaskModel($row["id_task"], $row["id_user"],$row["title"], $row["done"]);
-            $returnList[] = $task;
+            $task = new TaskModel($row["id_task"], $row["id_user"], $row["title"], $row["done"]);
+            $returnList[] = $task->getArray();
         }
         return $returnList;
     }
@@ -65,12 +65,34 @@ final class TaskService
     public static function renderTaksUnit(array $arrayTaks)
     {
         $returnTasksRender = [];
-        foreach ($arrayTaks as $key => $value) {
+        foreach ($arrayTaks as $taskArray) {
+            $taskDoneClass = "";
+            if ($taskArray["done"] != false){
+                $taskDoneClass = "done";
+            }
             $returnTasksRender[] = ViewUtils::render(
                 'items/task-item',
-                ["taskTitle" => $value["title"]]
+                ["taskTitle" => $taskArray["title"], "taskId" => $taskArray["idTask"], "done"=>$taskDoneClass]
             );
         }
         return implode(" ", $returnTasksRender);
+    }
+
+    public function deleteByID($id){
+        $query = "DELETE FROM {$this->dbTasktable} where id_task=:id_task";
+        $pdoConnected = $this->connectionDB->connect();
+        $stmt = $pdoConnected->prepare($query);
+        $stmt->execute(["id_task" => $id]);
+        header("Location: ./tasks");
+
+    }
+
+    public function doTaks($id){
+        $query = "UPDATE {$this->dbTasktable} SET done=1 where id_task=:id_task";
+        $pdoConnected = $this->connectionDB->connect();
+        $stmt = $pdoConnected->prepare($query);
+        $stmt->execute(["id_task" => $id]);
+        header("Location: ./tasks");
+
     }
 }

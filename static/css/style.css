@@ -203,9 +203,9 @@ a {
 
 .task-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: column;
-    height: 400px;
+    height: auto;
     margin-top: 20px;
     width: 700px;
     background-color: rgb(214, 214, 214);
@@ -270,4 +270,42 @@ footer {
 }
 .delete-task:hover{
 cursor: pointer;
+}
+
+.task-icons form{
+    display: flex;
+    flex-direction: row;
+}
+.delete-button{
+    background-color: crimson;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+}
+
+.update-button{
+    background-color: royalblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    margin-left: 10px;
+}
+
+.done{
+    text-decoration: line-through;
+    background-color: rgba(134, 134, 134, 0.347);
+
+}
+.done .update-button{
+    display: none;
 }

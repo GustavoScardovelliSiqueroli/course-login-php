@@ -9,7 +9,7 @@ final class MainPageController
 {
     public static function renderMainPage(string $htmlName, array $vars = [])
     {
-        session_start();
+        @session_start();
         @$userId = UtilsGS::isLoggedIn();
         $navItem = ViewUtils::render('items\nav-items-desconected');
         if (!empty($userId)) {

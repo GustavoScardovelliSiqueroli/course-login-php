@@ -34,6 +34,8 @@ final class UserController
         $user = new UserModel(name: $_POST["login"], password:$_POST["password"], email:$_POST["email"]);
         $userService = new UserService();
         $userService->register($user);
+        header("Location: ./login");
+
     }
 
 }

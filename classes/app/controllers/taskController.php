@@ -13,26 +13,22 @@ final class TaskController
     {
         $taskService = new TaskService();
 
-        
-        session_start();
-        $resultQuery = $taskService->getAll($_SESSION["user"]);
-        foreach ($resultQuery as $value) {
-            foreach (($value->getArray()) as $key => $value) {
-                echo "{$key} = {$value} <br>";
-            };
-            echo "<br>";
-        }
+        @session_start();
+        @$resultQuery = $taskService->getAll($_SESSION["user"]);
 
-        exit;
 
         if (MainPageController::isGET($requestMethod)) {
             return MainPageController::renderMainPage(
                 'tasks',
-                // ["tasks" => TaskService::renderTaksUnit($tasksInDB)]
+                ["tasks" => TaskService::renderTaksUnit($resultQuery)]
             );
         }
-
-        print_r($_POST["task"]);
+        if(isset($_POST["delete"])){
+            $taskService->deleteByID($_POST["delete"]);
+        }
+        if(isset($_POST["update"])){
+            $taskService->doTaks($_POST["update"]);
+        }
         $newTask = new TaskModel(title: $_POST["task"]);
         $taskService->save($newTask);
 
